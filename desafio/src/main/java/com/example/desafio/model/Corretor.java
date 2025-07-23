@@ -12,15 +12,15 @@ public class Corretor {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String nome;
     private String email;
     private String telefone;
 
 
-    public Corretor(String id, String nome, String email, String telefone) {
-        this.id = id;
+    public Corretor(String nome, String email, String telefone) {
+        
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -31,12 +31,12 @@ public class Corretor {
     }
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
