@@ -1,5 +1,7 @@
 package com.example.desafio.Dto;
 
-public record ImovelDTO(String tipoImovel, String bairro, String nomeCorretor) {
+import com.example.desafio.model.enums.TipoImovel;
+
+public record ImovelDTO(TipoImovel tipoImovel, String bairro, String nome) {
     
 }

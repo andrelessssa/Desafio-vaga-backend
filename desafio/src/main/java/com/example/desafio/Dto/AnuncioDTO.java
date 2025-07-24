@@ -1,5 +1,7 @@
 package com.example.desafio.Dto;
 
-public record AnuncioDTO(ImovelDTO imovel, CorretorDTO corretor) {
+import com.example.desafio.model.enums.TipoImovel;
+
+public record AnuncioDTO(TipoImovel tipoImovel, CorretorDTO corretor) {
     
 }
