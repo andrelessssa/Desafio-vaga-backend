@@ -1,5 +1,7 @@
 package com.example.desafio.model;
 
+import com.example.desafio.model.enums.TipoImovel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,19 +22,20 @@ public class Imovel {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private String tipo;
+    private TipoImovel tipo;
     private String bairro;
     private String descricao;
 
     public Imovel() {
     }
 
-    public Imovel(String tipo, String bairro, String descricao) {
-        
+    public Imovel(TipoImovel tipo, String bairro, String descricao) {
         this.tipo = tipo;
         this.bairro = bairro;
         this.descricao = descricao;
     }
+
+   
 
     
     
