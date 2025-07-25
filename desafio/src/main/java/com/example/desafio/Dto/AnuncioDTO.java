@@ -1,7 +1,9 @@
 package com.example.desafio.Dto;
 
-import com.example.desafio.model.enums.TipoImovel;
+import org.antlr.v4.runtime.misc.NotNull;
 
-public record AnuncioDTO(TipoImovel tipoImovel, CorretorDTO corretor) {
+public record AnuncioDTO( @NotNull Long idImovel,
+    @NotNull Long idCorretor) {
     
 }
+
