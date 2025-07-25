@@ -1,5 +1,9 @@
 package com.example.desafio.repository;
 
-public interface AnuncioRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.desafio.model.Anuncio;
+
+public interface AnuncioRepository extends JpaRepository<Anuncio, Long>{
     
 }
