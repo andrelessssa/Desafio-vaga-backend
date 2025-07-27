@@ -1,11 +1,16 @@
 package com.example.desafio.service;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.desafio.Dto.AnuncioDTO;
+import com.example.desafio.Dto.AtualizacaoAnuncioDTO;
 import com.example.desafio.Dto.CorretorDTO;
 import com.example.desafio.model.Anuncio;
 import com.example.desafio.model.Corretor;
@@ -39,6 +44,38 @@ public class AnuncioService {
         Anuncio anuncioCriado = new Anuncio(imovel, corretor);
         return anuncioRepository.save(anuncioCriado);   
     }
+    public List<Anuncio> listarAnuncios(){
+        return anuncioRepository.findAll();
+    }
+    public Anuncio buscarAnuncioPorId(Long id){
+        return anuncioRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anúncio não encontrado com ID: " + id));
+    }  
+    
+    public Anuncio atualizarAnuncio(Long id , AtualizacaoAnuncioDTO atualizacaoAnuncioDTO){
+        Anuncio anuncioAtual = buscarAnuncioPorId(id);
+
+        Imovel imovel = imovelRepository.findById(atualizacaoAnuncioDTO.idImovel())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Imóvel não encontrado"));
+
+        Corretor corretor = corretorRepository.findById(atualizacaoAnuncioDTO.idCorretor())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Corretor não encontrado"));
+
+        anuncioAtual.setImovel(imovel);
+        anuncioAtual.setCorretor(corretor);
+
+        return anuncioRepository.save(anuncioAtual);
+    }
+    public void deletarAnuncio(Long id){
+        Anuncio anuncio = buscarAnuncioPorId(id);
+        anuncioRepository.delete(anuncio);
+    }
+
+  
+    
+
+    
+
     
 
 }
