@@ -10,7 +10,9 @@ public interface AnuncioMapper {
 
     @Mapping(source = "imovel.id", target = "idImovel")
     @Mapping(source = "corretor.id", target = "idCorretor")
+    @Mapping(source = "corretor.nome", target = "nomeCorretor")
+    @Mapping(source = "imovel.tipo", target = "tipoImovel")
+    @Mapping(source = "imovel.bairro", target = "bairro")
     AnuncioDTO toDTO(Anuncio anuncio);
-
     
 }
