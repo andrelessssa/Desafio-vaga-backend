@@ -1,6 +1,7 @@
 package com.example.desafio.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.desafio.Dto.AnuncioDTO;
 import com.example.desafio.Dto.AtualizacaoAnuncioDTO;
 import com.example.desafio.Dto.CorretorDTO;
+import com.example.desafio.mappers.AnuncioMapper;
 import com.example.desafio.model.Anuncio;
 import com.example.desafio.model.Corretor;
 import com.example.desafio.model.Imovel;
@@ -28,6 +30,8 @@ public class AnuncioService {
     private CorretorRepository corretorRepository;
     @Autowired
     private ImovelRepository imovelRepository;
+    @Autowired
+    private AnuncioMapper anuncioMapper;
 
 
     public Anuncio criarAnuncio(AnuncioDTO DTO){
@@ -69,6 +73,14 @@ public class AnuncioService {
     public void deletarAnuncio(Long id){
         Anuncio anuncio = buscarAnuncioPorId(id);
         anuncioRepository.delete(anuncio);
-    }   
+    }  
+    
+    //----------Filtro de anúncios por nome do corretor ou bairro do imóvel----------//
+
+    public List<AnuncioDTO> BuscarPorCorretorOuBairro(String corretor, String bairro){
+        List<Anuncio> resultado = anuncioRepository.findByCorretorNomeOrImovelBairro(corretor, bairro);
+        return resultado.stream().map(anuncioMapper::toDTO).collect(Collectors.toList());
+
+    }
 
 }

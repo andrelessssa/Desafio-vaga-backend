@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.desafio.Dto.AnuncioDTO;
@@ -19,6 +20,8 @@ import com.example.desafio.Dto.AtualizacaoAnuncioDTO;
 import com.example.desafio.model.Anuncio;
 
 import com.example.desafio.service.AnuncioService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/anuncio")
@@ -51,10 +54,16 @@ public class AnuncioController {
     public ResponseEntity<Object> deletarAnuncio(@PathVariable Long id){
         anuncioService.deletarAnuncio(id);
         return ResponseEntity.status(HttpStatus.OK).body("Anuncio Deletado");
-
-
     }
 
+    //----------Filtro de anúncios por nome do corretor ou bairro do imóvel----------//
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<AnuncioDTO>> BuscarPorCorretorOuBairro(@RequestParam(required = false) String corretor, @RequestParam(required = false) String bairro){
+        List<AnuncioDTO> anuncioDTOs = anuncioService.BuscarPorCorretorOuBairro(corretor, bairro);
+        return ResponseEntity.ok(anuncioDTOs);
+
+    } 
 
     
 }
