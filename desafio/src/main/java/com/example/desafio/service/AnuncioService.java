@@ -69,13 +69,6 @@ public class AnuncioService {
     public void deletarAnuncio(Long id){
         Anuncio anuncio = buscarAnuncioPorId(id);
         anuncioRepository.delete(anuncio);
-    }
-
-  
-    
-
-    
-
-    
+    }   
 
 }
