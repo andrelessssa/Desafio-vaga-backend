@@ -1,12 +1,18 @@
 package com.example.desafio.Dto;
 
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotNull;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public record AnuncioDTO(
-    @NotNull Long idImovel,
-    @NotNull Long idCorretor,
-    String nomeCorretor,
-    String tipoImovel,
-    String bairro
+    @NotNull(message = "Id do imóvel é obrigatório") Long idImovel,
+    @NotNull(message = "Id do corretor é obrigatório") Long idCorretor,
+    @NotBlank(message = "Nome do corretor é obrigatório")
+    @Size(min = 3, max = 100) String nomeCorretor,
+    @NotBlank(message = "Tipo do imóvel é obrigatório")
+    @Size(max = 50) String tipoImovel,
+    @NotBlank(message = "Bairro é obrigatório")
+    @Size(max = 100) String bairro
 ) {}
 
