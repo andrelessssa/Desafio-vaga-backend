@@ -3,16 +3,14 @@ package com.example.desafio.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.desafio.Dto.AnuncioDTO;
 import com.example.desafio.Dto.AtualizacaoAnuncioDTO;
-import com.example.desafio.Dto.CorretorDTO;
 import com.example.desafio.mappers.AnuncioMapper;
 import com.example.desafio.model.Anuncio;
 import com.example.desafio.model.Corretor;
@@ -53,7 +51,7 @@ public class AnuncioService {
     }
     public Anuncio buscarAnuncioPorId(Long id){
         return anuncioRepository.findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anúncio não encontrado com ID: " + id));
+        .orElseThrow(() -> new RuntimeException( "Anúncio não encontrado com ID: " + id));
     }  
     
     public Anuncio atualizarAnuncio(Long id , AtualizacaoAnuncioDTO atualizacaoAnuncioDTO){

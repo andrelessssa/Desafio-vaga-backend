@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.desafio.Dto.CorretorDTO;
+import com.example.desafio.exception.CorretorNaoEncontradoException;
 import com.example.desafio.model.Corretor;
 import com.example.desafio.repository.CorretorRepository;
 
@@ -26,7 +27,7 @@ public class CorretorService {
     }
     public Corretor buscarCorretorPorID(Long id){
         return corretorRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Corretor não encontrado com ID: " + id));
+        .orElseThrow(() -> new CorretorNaoEncontradoException(id));
     }
     public Corretor atualizarCorretor(Long id, CorretorDTO corretorDTO){
         Corretor corretor = buscarCorretorPorID(id);
