@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "DesafioApplication",
+      "request": "launch",
+      "mainClass": "com.example.desafio.DesafioApplication",
+      "projectName": "backend"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-DesafioApplication<desafio>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
