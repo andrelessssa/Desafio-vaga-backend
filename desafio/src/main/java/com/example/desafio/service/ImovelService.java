@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.example.desafio.Dto.ImovelDTO;
+import com.example.desafio.exception.ImovelNaoEncontradoException;
 import com.example.desafio.model.Imovel;
 import com.example.desafio.repository.ImovelRepository;
 
@@ -28,7 +29,7 @@ public class ImovelService {
     }
     public Imovel buscarImovelPorId(Long id){
         return imovelRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Imovel não encontrado com ID: " + id));
+        .orElseThrow(() -> new ImovelNaoEncontradoException(id));
     }
     public Imovel atualizarImovel(Long id, ImovelDTO imovelDTO){
         Imovel imovelAtualizado = buscarImovelPorId(id);

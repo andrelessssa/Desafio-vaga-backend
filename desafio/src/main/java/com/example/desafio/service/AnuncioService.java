@@ -11,6 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.desafio.Dto.AnuncioDTO;
 import com.example.desafio.Dto.AtualizacaoAnuncioDTO;
+import com.example.desafio.exception.AnuncioNaoEncontradoException;
+import com.example.desafio.exception.CorretorNaoEncontradoException;
+import com.example.desafio.exception.ImovelNaoEncontradoException;
 import com.example.desafio.mappers.AnuncioMapper;
 import com.example.desafio.model.Anuncio;
 import com.example.desafio.model.Corretor;
@@ -49,19 +52,19 @@ public class AnuncioService {
     public List<Anuncio> listarAnuncios(){
         return anuncioRepository.findAll();
     }
-    public Anuncio buscarAnuncioPorId(Long id){
+     public Anuncio buscarAnuncioPorId(Long id){
         return anuncioRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException( "Anúncio não encontrado com ID: " + id));
-    }  
+        .orElseThrow(() -> new AnuncioNaoEncontradoException(id));
+    } 
     
     public Anuncio atualizarAnuncio(Long id , AtualizacaoAnuncioDTO atualizacaoAnuncioDTO){
         Anuncio anuncioAtual = buscarAnuncioPorId(id);
 
         Imovel imovel = imovelRepository.findById(atualizacaoAnuncioDTO.idImovel())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Imóvel não encontrado"));
+        .orElseThrow(() -> new ImovelNaoEncontradoException(id));
 
         Corretor corretor = corretorRepository.findById(atualizacaoAnuncioDTO.idCorretor())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Corretor não encontrado"));
+        .orElseThrow(() -> new CorretorNaoEncontradoException(id));
 
         anuncioAtual.setImovel(imovel);
         anuncioAtual.setCorretor(corretor);
