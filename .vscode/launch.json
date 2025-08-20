@@ -4,6 +4,13 @@
       "type": "java",
       "name": "DesafioApplication",
       "request": "launch",
+      "mainClass": "br.com.andrelessa.backend.DesafioApplication",
+      "projectName": "backend"
+    },
+    {
+      "type": "java",
+      "name": "DesafioApplication",
+      "request": "launch",
       "mainClass": "com.example.desafio.DesafioApplication",
       "projectName": "backend"
     },
