@@ -1,1 +1,13 @@
-<h1>Projeto limpo e pronto pra começar!</h1>
+<h2>Lista de Anúncios</h2>
+
+<div *ngFor="let anuncio of anuncios" class="anuncio-card">
+  <h3> {{ anuncio.imovel.tipo }} - {{ anuncio.imovel.bairro }}</h3>
+  <p><strong>Descrição:</strong> {{ anuncio.imovel.descricao }}</p>
+
+  <h4> Corretor Responsável</h4>
+  <p><strong>Nome:</strong> {{ anuncio.corretor.nome }}</p>
+  <p><strong>Email:</strong> {{ anuncio.corretor.email }}</p>
+  <p><strong>Telefone:</strong> {{ anuncio.corretor.telefone }}</p>
+
+  <hr>
+</div>
